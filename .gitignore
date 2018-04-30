@@ -1,0 +1,6 @@
+Build/bower_components/*
+Build/node_modules/*
+nbproject/*
+Thumbs.db
+prepros.cfg
+.idea/
