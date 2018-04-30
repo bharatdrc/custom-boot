@@ -1,0 +1,78 @@
+<f:layout name="QMDefault"/>
+<f:section name="Main">
+
+  <section id="content">
+          <div class="container">
+            
+              <div class="row">
+                  <div class="col-md-5 col-sm-5 min-height left-navi">
+                      <div class="straigh-line"></div>
+                      <div class="side-menu top-space">
+                          <div class="title title-left">
+                                Inhalt
+                            </div>
+                          <f:cObject typoscriptObjectPath="lib.leftSubMenu"/>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-sm-7 min-height">
+                      
+                      <div class="straigh-line"></div>
+                      <div class="content-wrapper top-space">
+                          <div class="title title-right">
+                                Dokument
+                            </div>
+                            <div class="content-part">
+                                <span class="current-date"><f:cObject typoscriptObjectPath="lib.current_date"/></span>
+                                <f:cObject typoscriptObjectPath="lib.dynamicContent" data="{pageUid: '{data.uid}', colPos: '0'}"/>
+                              
+                                <div class="text-right bottom-link">
+                                  <a href="javascript:void(0);" onclick="window.print();">Drucken</a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+        </section>
+  <script>
+console.log(jQuery);
+var WinWidth;
+var WinHeight;
+ var DocHeight;
+// Window Ready
+$(document).ready(function(){
+  WinWidth = $(window).width();
+  WinHeight = $(window).height();
+  DocHeight = $(document).height();
+  SpaceCont();
+  // Responsive menu toggle
+  $(".dropdown.active> .submenu").show();
+  $('.dropdown>.arrow').on('click', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    $(this).closest("li.dropdown").toggleClass('active').children(".submenu").stop("true", "true").slideToggle(500);
+    $(this).closest("li.dropdown").siblings().children(".submenu").stop("true", "true").slideUp();
+    $(this).closest("li.dropdown").siblings().removeClass("active");
+  });
+  
+});
+
+$(window).resize(function(){
+  WinWidth = $(window).width();
+  WinHeight = $(window).height();
+  DocHeight = $(document).height();
+  SpaceCont();
+});
+
+function SpaceCont(){
+  var ConOff = ($(".container").offset().left);
+  $(".title-left").css({'left':"-" + ConOff + 'px','padding-left': ConOff + 15 + 'px'});
+  $(".title-right").css({'right':"-" + ConOff + 'px','padding-right': ConOff + 15 + 'px'});
+  
+  var HeadH = $("#header").outerHeight();
+  var TotHeight = DocHeight - HeadH;
+  $(".min-height").css('min-height',TotHeight+'px');
+}
+</script>
+</f:section>
